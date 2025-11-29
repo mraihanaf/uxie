@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "uxie",
   "private": true,
   "scripts": {
     "build": "turbo run build",
