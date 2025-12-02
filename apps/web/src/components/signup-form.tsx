@@ -1,3 +1,8 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +17,7 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
+  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
@@ -19,62 +25,157 @@ export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+    <div className={cn("flex flex-col gap-6 w-full", className)} {...props}>
+      <Card className="glass w-full border-border/50 shadow-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-xl">Create your account</CardTitle>
-          <CardDescription>
-            Enter your email below to create your account
+          <CardTitle className="text-3xl font-semibold">
+            Buat Akun Baru
+          </CardTitle>
+          <CardDescription className="text-sm">
+            Daftar untuk memulai perjalanan Anda
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <FieldGroup>
               <Field>
-                <FieldLabel htmlFor="name">Full Name</FieldLabel>
-                <Input id="name" type="text" placeholder="John Doe" required />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="name" className="text-sm font-medium">
+                  Nama Lengkap
+                </FieldLabel>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
+                  id="name"
+                  type="text"
+                  placeholder="John Doe"
+                  className="bg-muted transition-all duration-150 focus:border-primary focus:ring-primary/20"
                   required
                 />
               </Field>
               <Field>
-                <Field className="grid grid-cols-2 gap-4">
-                  <Field>
-                    <FieldLabel htmlFor="password">Password</FieldLabel>
-                    <Input id="password" type="password" required />
-                  </Field>
-                  <Field>
-                    <FieldLabel htmlFor="confirm-password">
-                      Confirm Password
-                    </FieldLabel>
-                    <Input id="confirm-password" type="password" required />
-                  </Field>
-                </Field>
-                <FieldDescription>
-                  Must be at least 8 characters long.
+                <FieldLabel htmlFor="email" className="text-sm font-medium">
+                  Email
+                </FieldLabel>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="nama@email.com"
+                  className="bg-muted transition-all duration-150 focus:border-primary focus:ring-primary/20"
+                  required
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="password" className="text-sm font-medium">
+                  Password
+                </FieldLabel>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Masukkan password"
+                    className="bg-muted pr-10 transition-all duration-150 focus:border-primary focus:ring-primary/20"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-primary transition-all duration-150 hover:scale-110 hover:text-primary/80"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+                <FieldDescription className="mt-1 text-xs text-muted-foreground">
+                  Password harus minimal 8 karakter
                 </FieldDescription>
               </Field>
               <Field>
-                <Button type="submit">Create Account</Button>
-                <FieldDescription className="text-center">
-                  Already have an account? <a href="#">Sign in</a>
-                </FieldDescription>
+                <FieldLabel
+                  htmlFor="confirm-password"
+                  className="text-sm font-medium"
+                >
+                  Konfirmasi Password
+                </FieldLabel>
+                <div className="relative">
+                  <Input
+                    id="confirm-password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    placeholder="Konfirmasi password"
+                    className="bg-muted pr-10 transition-all duration-150 focus:border-primary focus:ring-primary/20"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-primary transition-all duration-150 hover:scale-110 hover:text-primary/80"
+                  >
+                    {showConfirmPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
               </Field>
+              <Field>
+                <Button
+                  type="submit"
+                  className="w-full bg-primary text-primary-foreground transition-all duration-150 hover:scale-[1.02] hover:shadow-md active:scale-[0.98]"
+                >
+                  Daftar
+                </Button>
+              </Field>
+              <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
+                atau lanjutkan dengan email
+              </FieldSeparator>
+              <Field>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full border-border bg-secondary text-secondary-foreground transition-all duration-150 hover:bg-secondary/80 hover:border-primary hover:shadow-sm"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="mr-2 h-5 w-5"
+                  >
+                    <path
+                      d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  Daftar dengan Google
+                </Button>
+              </Field>
+              <FieldDescription className="px-0 text-center text-xs leading-relaxed text-muted-foreground">
+                Dengan melanjutkan, Anda menyetujui{" "}
+                <Link href="#" className="text-primary hover:underline">
+                  Syarat Layanan
+                </Link>{" "}
+                dan{" "}
+                <Link href="#" className="text-primary hover:underline">
+                  Kebijakan Privasi
+                </Link>
+                .
+              </FieldDescription>
+              <FieldDescription className="px-0 text-center text-sm font-medium text-muted-foreground">
+                Sudah punya akun?{" "}
+                <Link
+                  href="/login"
+                  className="text-primary transition-all duration-150 hover:text-primary/80 hover:underline"
+                >
+                  Masuk di sini
+                </Link>
+              </FieldDescription>
             </FieldGroup>
           </form>
         </CardContent>
       </Card>
-      <FieldDescription className="px-6 text-center">
-        By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
-      </FieldDescription>
     </div>
   );
 }
