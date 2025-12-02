@@ -61,10 +61,10 @@ export function Sidebar() {
           >
             <div className="relative h-8 w-8 shrink-0">
               <Image
-                src={theme === "light" ? "/logo/white.png" : "/logo/black.png"}
+                src="/logo/uxie.png"
                 alt="Uxie Logo"
                 fill
-                className="object-contain transition-all duration-200 hover:drop-shadow-[0_0_8px_rgba(91,127,238,0.6)] dark:hover:drop-shadow-[0_0_8px_rgba(110,205,193,0.6)]"
+                className="object-contain"
                 priority
               />
             </div>
