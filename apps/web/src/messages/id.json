@@ -1,0 +1,81 @@
+{
+  "HomePage": {
+    "title": "Selamat Datang di Uxie",
+    "subtitle": "Ubah pengalaman belajar Anda dengan pendidikan interaktif",
+    "startLearning": "Mulai Belajar",
+    "learnMore": "Pelajari Lebih Lanjut"
+  },
+  "Auth": {
+    "login": "Masuk",
+    "signup": "Daftar",
+    "logout": "Keluar",
+    "welcomeBack": "Selamat Datang",
+    "loginDescription": "Masuk ke akun Anda untuk melanjutkan",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Lupa password?",
+    "enterPassword": "Masukkan password",
+    "continueWithEmail": "atau lanjutkan dengan email",
+    "continueWithGoogle": "Lanjutkan dengan Google",
+    "noAccount": "Belum punya akun?",
+    "signUpNow": "Daftar sekarang",
+    "createAccount": "Buat Akun Baru",
+    "signupDescription": "Daftar untuk memulai perjalanan Anda",
+    "fullName": "Nama Lengkap",
+    "confirmPassword": "Konfirmasi password",
+    "passwordHelper": "Password harus minimal 8 karakter",
+    "hasAccount": "Sudah punya akun?",
+    "signInHere": "Masuk di sini"
+  },
+  "Settings": {
+    "title": "Pengaturan",
+    "profile": {
+      "editProfile": "Edit Profil",
+      "viewFullProfile": "Lihat Profil Lengkap",
+      "userID": "User ID",
+      "joinDate": "Join Date",
+      "accountType": "Account Type",
+      "lastActive": "Last Active"
+    },
+    "language": {
+      "title": "Bahasa",
+      "description": "Pilih bahasa untuk antarmuka aplikasi"
+    },
+    "general": {
+      "title": "Umum",
+      "description": "Pengaturan umum aplikasi",
+      "darkMode": "Tema Gelap",
+      "darkModeDescription": "Ubah penampilan ke gelap untuk kenyamanan mata",
+      "notifications": "Notifikasi",
+      "notificationsDescription": "Terima notifikasi dari aplikasi",
+      "pushNotifications": "Notifikasi push di browser",
+      "emailNotifications": "Kirim ringkasan email",
+      "sound": "Suara notifikasi saat ada pesan",
+      "autoSave": "Simpan Otomatis",
+      "autoSaveDescription": "Simpan perubahan secara otomatis",
+      "compactMode": "Mode Ringkas",
+      "compactModeDescription": "Tampilan lebih padat dan efisien",
+      "accessibility": "Aksesibilitas",
+      "accessibilityDescription": "Pengaturan untuk aksesibilitas",
+      "fontSize": "Ukuran Font",
+      "highContrast": "Kontras Tinggi",
+      "reduceAnimations": "Kurangi Animasi",
+      "about": "Tentang Aplikasi",
+      "aboutDescription": "Informasi versi dan build"
+    },
+    "close": "Tutup"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "Tentang",
+    "dashboard": "Dashboard",
+    "settings": "Pengaturan"
+  },
+  "About": {
+    "title": "Halaman Tentang"
+  },
+  "Dashboard": {
+    "title": "Halaman Dashboard"
+  }
+}
+
