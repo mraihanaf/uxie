@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,41 +22,29 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
-export default function SignupPage() {
+export default function LoginPage() {
   const [showPassword, setShowPassword] = React.useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const t = useTranslations("Auth");
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-background to-[#F7F7F7] dark:from-black dark:via-black dark:to-[#252525] bg-grid-pattern p-6 md:p-10">
-      <div className="w-full max-w-[480px]">
+      <div className="w-full max-w-[420px]">
         <div className={cn("flex flex-col gap-6 w-full")}>
           <Card className="glass w-full border-border/50 shadow-lg">
             <CardHeader className="text-center">
               <CardTitle className="text-3xl font-semibold">
-                Buat Akun Baru
+                {t("welcomeBack")}
               </CardTitle>
               <CardDescription className="text-sm">
-                Daftar untuk memulai perjalanan Anda
+                {t("loginDescription")}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form>
                 <FieldGroup>
                   <Field>
-                    <FieldLabel htmlFor="name" className="text-sm font-medium">
-                      Nama Lengkap
-                    </FieldLabel>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="John Doe"
-                      className="bg-muted transition-all duration-150 focus:border-primary focus:ring-primary/20"
-                      required
-                    />
-                  </Field>
-                  <Field>
                     <FieldLabel htmlFor="email" className="text-sm font-medium">
-                      Email
+                      {t("email")}
                     </FieldLabel>
                     <Input
                       id="email"
@@ -66,17 +55,25 @@ export default function SignupPage() {
                     />
                   </Field>
                   <Field>
-                    <FieldLabel
-                      htmlFor="password"
-                      className="text-sm font-medium"
-                    >
-                      Password
-                    </FieldLabel>
+                    <div className="flex items-center justify-between">
+                      <FieldLabel
+                        htmlFor="password"
+                        className="text-sm font-medium"
+                      >
+                        {t("password")}
+                      </FieldLabel>
+                      <Link
+                        href="#"
+                        className="ml-auto text-xs font-medium text-primary transition-all duration-150 hover:text-primary/80 hover:underline"
+                      >
+                        {t("forgotPassword")}
+                      </Link>
+                    </div>
                     <div className="relative">
                       <Input
                         id="password"
                         type={showPassword ? "text" : "password"}
-                        placeholder="Masukkan password"
+                        placeholder={t("enterPassword")}
                         className="bg-muted pr-10 transition-all duration-150 focus:border-primary focus:ring-primary/20"
                         required
                       />
@@ -92,56 +89,23 @@ export default function SignupPage() {
                         )}
                       </button>
                     </div>
-                    <FieldDescription className="mt-1 text-xs text-muted-foreground">
-                      Password harus minimal 8 karakter
-                    </FieldDescription>
-                  </Field>
-                  <Field>
-                    <FieldLabel
-                      htmlFor="confirm-password"
-                      className="text-sm font-medium"
-                    >
-                      Konfirmasi Password
-                    </FieldLabel>
-                    <div className="relative">
-                      <Input
-                        id="confirm-password"
-                        type={showConfirmPassword ? "text" : "password"}
-                        placeholder="Konfirmasi password"
-                        className="bg-muted pr-10 transition-all duration-150 focus:border-primary focus:ring-primary/20"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setShowConfirmPassword(!showConfirmPassword)
-                        }
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-primary transition-all duration-150 hover:scale-110 hover:text-primary/80"
-                      >
-                        {showConfirmPassword ? (
-                          <EyeOff className="h-4 w-4" />
-                        ) : (
-                          <Eye className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
                   </Field>
                   <Field>
                     <Button
                       type="submit"
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground transition-none!"
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground !transition-none!"
                     >
-                      Daftar
+                      {t("login")}
                     </Button>
                   </Field>
                   <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
-                    atau lanjutkan dengan email
+                    {t("continueWithEmail")}
                   </FieldSeparator>
                   <Field>
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full border-border bg-secondary text-secondary-foreground hover:bg-secondary hover:text-secondary-foreground hover:border-border transition-none!"
+                      className="w-full border-border bg-secondary text-secondary-foreground !transition-none !duration-0 hover:!bg-secondary hover:!text-secondary-foreground hover:!border-border hover:!shadow-xs dark:!bg-secondary dark:!border-border dark:hover:!bg-secondary dark:hover:!text-secondary-foreground dark:hover:!border-border dark:hover:!shadow-xs"
                     >
                       <svg
                         className="mr-2 h-5 w-5"
@@ -165,16 +129,16 @@ export default function SignupPage() {
                           fill="#EA4335"
                         />
                       </svg>
-                      Daftar dengan Google
+                      {t("continueWithGoogle")}
                     </Button>
                   </Field>
                   <FieldDescription className="px-0 text-center text-sm font-medium text-muted-foreground">
-                    Sudah punya akun?{" "}
+                    {t("noAccount")}{" "}
                     <Link
-                      href="/login"
+                      href="/signup"
                       className="text-primary transition-all duration-150 hover:text-primary/80 hover:underline"
                     >
-                      Masuk di sini
+                      {t("signUpNow")}
                     </Link>
                   </FieldDescription>
                 </FieldGroup>
