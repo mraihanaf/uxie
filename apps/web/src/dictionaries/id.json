@@ -1,0 +1,42 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "Tentang",
+    "dashboard": "Dashboard",
+    "settings": "Pengaturan",
+    "logout": "Keluar",
+    "close": "Tutup",
+    "general": "Umum",
+    "generalDescription": "Pengaturan umum aplikasi"
+  },
+  "hero": {
+    "title": "Selamat Datang di Uxie",
+    "subtitle": "Platform Pendidikan Futuristik untuk Masa Depan Lebih Baik",
+    "cta_primary": "Mulai Belajar",
+    "cta_secondary": "Pelajari Lebih Lanjut"
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "language": "Bahasa",
+    "language_description": "Mengatur kenyamanan visual sesuai preferensi Anda",
+    "theme": "Tema",
+    "themeDescription": "Mengikuti pengaturan sistem perangkat Anda",
+    "notifications": "Notifikasi",
+    "notificationsDescription": "Terima notifikasi dari aplikasi",
+    "autoSave": "Simpan Otomatis",
+    "autoSaveDescription": "Simpan perubahan secara otomatis",
+    "accessibility": "Aksesibilitas",
+    "accessibilityDescription": "Pengaturan untuk aksesibilitas",
+    "highContrast": "Kontras Tinggi",
+    "reduceAnimations": "Kurangi Animasi",
+    "pushNotifications": "Notifikasi push di browser",
+    "emailNotifications": "Kirim ringkasan email",
+    "sound": "Suara notifikasi saat ada pesan",
+    "close": "Tutup"
+  },
+  "footer": {
+    "copyright": "© 2025 Uxie. Semua hak dilindungi.",
+    "follow": "Ikuti kami"
+  }
+}
+

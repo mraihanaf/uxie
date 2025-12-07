@@ -1,0 +1,42 @@
+{
+  "common": {
+    "home": "Home",
+    "about": "About",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "logout": "Logout",
+    "close": "Close",
+    "general": "General",
+    "generalDescription": "General app settings"
+  },
+  "hero": {
+    "title": "Welcome to Uxie",
+    "subtitle": "Futuristic Educational Platform for a Better Future",
+    "cta_primary": "Start Learning",
+    "cta_secondary": "Learn More"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "language_description": "Set visual comfort according to your preference",
+    "theme": "Theme",
+    "themeDescription": "Follows your device system settings",
+    "notifications": "Notifications",
+    "notificationsDescription": "Receive notifications from the app",
+    "autoSave": "Auto Save",
+    "autoSaveDescription": "Automatically save changes",
+    "accessibility": "Accessibility",
+    "accessibilityDescription": "Accessibility settings",
+    "highContrast": "High Contrast",
+    "reduceAnimations": "Reduce Animations",
+    "pushNotifications": "Browser push notifications",
+    "emailNotifications": "Send email summary",
+    "sound": "Notification sound when there's a message",
+    "close": "Close"
+  },
+  "footer": {
+    "copyright": "© 2025 Uxie. All rights reserved.",
+    "follow": "Follow us"
+  }
+}
+

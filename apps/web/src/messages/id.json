@@ -1,0 +1,156 @@
+{
+  "HomePage": {
+    "title": "Selamat Datang di Uxie",
+    "subtitle": "Ubah pengalaman belajar Anda dengan pendidikan interaktif",
+    "startLearning": "Mulai Belajar",
+    "learnMore": "Pelajari Lebih Lanjut"
+  },
+  "Auth": {
+    "login": "Masuk",
+    "signup": "Daftar",
+    "logout": "Keluar",
+    "welcomeBack": "Selamat Datang",
+    "loginDescription": "Masuk ke akun Anda untuk melanjutkan",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Lupa password?",
+    "enterPassword": "Masukkan password",
+    "continueWithEmail": "atau lanjutkan dengan email",
+    "continueWithGoogle": "Lanjutkan dengan Google",
+    "noAccount": "Belum punya akun?",
+    "signUpNow": "Daftar sekarang",
+    "createAccount": "Buat Akun Baru",
+    "signupDescription": "Daftar untuk memulai perjalanan Anda",
+    "fullName": "Nama Lengkap",
+    "confirmPassword": "Konfirmasi password",
+    "passwordHelper": "Password harus minimal 8 karakter",
+    "hasAccount": "Sudah punya akun?",
+    "signInHere": "Masuk di sini"
+  },
+  "Settings": {
+    "title": "Pengaturan",
+    "profile": {
+      "editProfile": "Edit Profil",
+      "viewFullProfile": "Lihat Profil Lengkap",
+      "userID": "User ID",
+      "joinDate": "Join Date",
+      "accountType": "Account Type",
+      "lastActive": "Last Active"
+    },
+    "language": {
+      "title": "Bahasa",
+      "description": "Pilih bahasa untuk antarmuka aplikasi"
+    },
+    "general": {
+      "title": "Umum",
+      "description": "Pengaturan umum aplikasi",
+      "darkMode": "Tema Gelap",
+      "darkModeDescription": "Ubah penampilan ke gelap untuk kenyamanan mata",
+      "notifications": "Notifikasi",
+      "notificationsDescription": "Terima notifikasi dari aplikasi",
+      "pushNotifications": "Notifikasi push di browser",
+      "emailNotifications": "Kirim ringkasan email",
+      "sound": "Suara notifikasi saat ada pesan",
+      "autoSave": "Simpan Otomatis",
+      "autoSaveDescription": "Simpan perubahan secara otomatis",
+      "compactMode": "Mode Ringkas",
+      "compactModeDescription": "Tampilan lebih padat dan efisien",
+      "accessibility": "Aksesibilitas",
+      "accessibilityDescription": "Pengaturan untuk aksesibilitas",
+      "fontSize": "Ukuran Font",
+      "highContrast": "Kontras Tinggi",
+      "reduceAnimations": "Kurangi Animasi",
+      "about": "Tentang Aplikasi",
+      "aboutDescription": "Informasi versi dan build"
+    },
+    "close": "Tutup"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "Tentang",
+    "dashboard": "Dashboard",
+    "settings": "Pengaturan"
+  },
+  "About": {
+    "title": "Halaman Tentang"
+  },
+  "Dashboard": {
+    "home": {
+      "title": "Dashboard",
+      "description": "Pantau progres belajar Anda dengan visualisasi data real-time.",
+      "createCourse": "Buat Kursus Baru",
+      "createCourseDescription": "Upload materi dan buat kursus pembelajaran baru dengan AI",
+      "viewCourses": "Lihat Kursus",
+      "viewCoursesDescription": "Akses semua kursus Anda dan lanjutkan pembelajaran",
+      "startLearning": "Mulai Belajar",
+      "startLearningDescription": "Lanjutkan pembelajaran dari bab terakhir yang Anda baca",
+      "summary": "Ringkasan Pembelajaran",
+      "summaryDescription": "Mulai dengan membuat kursus baru atau lanjutkan pembelajaran yang sudah ada."
+    },
+    "courseCreation": {
+      "title": "Buat Kursus Baru",
+      "topicLabel": "Apa yang ingin kamu pelajari hari ini?",
+      "topicPlaceholder": "Contoh: Sejarah Romawi Kuno...",
+      "uploadLabel": "Upload Materi",
+      "timelineLabel": "Pilih Timeline Pembelajaran",
+      "difficultyLabel": "Tingkat Kesulitan",
+      "createButton": "Create Course",
+      "creating": "Membuat Kursus...",
+      "timeline": {
+        "quick": {
+          "title": "Penyegaran Cepat",
+          "duration": "2 Jam",
+          "description": "Cocok untuk review kilat"
+        },
+        "standard": {
+          "title": "Standar",
+          "duration": "5-10 Jam",
+          "description": "Pembelajaran mendalam dan komprehensif"
+        },
+        "deepDive": {
+          "title": "Deep Dive",
+          "duration": "25+ Jam",
+          "description": "Eksplorasi mendalam dengan detail lengkap"
+        }
+      },
+      "difficulty": {
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced"
+      }
+    },
+    "courseDashboard": {
+      "chapterList": "Daftar Bab",
+      "progressLabel": "Progress Belajar",
+      "estimation": "Estimasi",
+      "level": "Tingkat",
+      "chaptersCompleted": "Bab Selesai"
+    },
+    "studyView": {
+      "sidebarTitle": "Bab-bab",
+      "duration": "Durasi",
+      "previousChapter": "Previous Chapter",
+      "nextChapter": "Next Chapter",
+      "chatPlaceholder": "Ketik pesan...",
+      "chatGreeting": "Halo! Ada yang bisa saya bantu tentang materi ini?",
+      "chatResponse": "Terima kasih atas pertanyaannya! Saya akan membantu menjelaskan lebih detail tentang materi ini.",
+      "introduction": "Pendahuluan",
+      "conclusion": "Kesimpulan"
+    },
+    "quizView": {
+      "questionCounter": "Soal {current} dari {total}",
+      "previous": "Previous",
+      "submitAnswer": "Submit Answer",
+      "nextQuestion": "Next Question",
+      "finishQuiz": "Finish Quiz",
+      "correctTitle": "Jawabanmu tepat!",
+      "correctMessage": "Kamu memahami konsep ini dengan baik.",
+      "incorrectTitle": "Kurang tepat!",
+      "incorrectMessage": "Pelajari lagi bagian tentang {topic}. Jawaban yang benar adalah {answer}.",
+      "aiTips": "💡 Saran AI Tutor",
+      "correctTip": "Romulus adalah pendiri sekaligus raja pertama Kota Roma. Menurut legenda, dia dan saudara kembarnya Remus dibesarkan oleh serigala betina.",
+      "incorrectTip": "Pelajari lebih lanjut tentang sejarah Romawi Kuno untuk memahami konsep ini dengan lebih baik. Baca kembali materi yang telah disediakan.",
+      "score": "Skor"
+    }
+  }
+}
