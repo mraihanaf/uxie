@@ -21,31 +21,66 @@ function getSystemTheme(): Theme {
     : "light";
 }
 
+function getInitialTheme(): Theme {
+  // This function will be called during SSR and initial client render
+  if (typeof window === "undefined") return "light";
+
+  // Check if theme was already set by the inline script
+  const htmlElement = document.documentElement;
+  if (htmlElement.classList.contains("dark")) return "dark";
+  if (htmlElement.classList.contains("light")) return "light";
+
+  // Fallback to localStorage or system preference
+  const stored = localStorage.getItem("uxie-theme") as Theme | null;
+  if (stored) return stored;
+
+  return getSystemTheme();
+}
+
 export function ThemeProvider({
   children,
   ...props
 }: {
   children: React.ReactNode;
 } & React.ComponentProps<"div">) {
-  const [theme, setTheme] = React.useState<Theme>("light");
+  // Initialize with theme from script/localStorage to avoid flash
+  const [theme, setTheme] = React.useState<Theme>(getInitialTheme);
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
-    // Check localStorage first, if not found, use system theme
-    const stored = localStorage.getItem("uxie-theme") as Theme | null;
-    const initialTheme = stored || getSystemTheme();
-    setTheme(initialTheme);
+    // Sync with what was already set by the inline script
+    const root = window.document.documentElement;
+    const currentTheme = root.classList.contains("dark") ? "dark" : "light";
+    setTheme(currentTheme);
 
     // Listen for system theme changes (only if user hasn't manually set a theme)
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const checkAndUpdateTheme = () => {
+      const stored = localStorage.getItem("uxie-theme") as Theme | null;
+      if (!stored) {
+        // No manual preference - follow system
+        const systemTheme = mediaQuery.matches ? "dark" : "light";
+        setTheme(systemTheme);
+        root.classList.remove("light", "dark");
+        root.classList.add(systemTheme);
+      }
+    };
+
     const handleChange = (e: MediaQueryListEvent) => {
       const stored = localStorage.getItem("uxie-theme") as Theme | null;
       if (!stored) {
         // Only auto-update if user hasn't manually set a preference
-        setTheme(e.matches ? "dark" : "light");
+        const newTheme = e.matches ? "dark" : "light";
+        setTheme(newTheme);
+        root.classList.remove("light", "dark");
+        root.classList.add(newTheme);
       }
     };
+
+    // Check on mount to ensure we're following system if no manual preference
+    checkAndUpdateTheme();
 
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);

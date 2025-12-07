@@ -41,8 +41,8 @@ export function SettingsButton({
     >
       <Settings
         className={cn(
-          "h-[18px] w-[18px] shrink-0 text-primary transition-transform duration-500 ease-linear",
-          !disabled && !isActive && "group-hover/settings:rotate-360",
+          "h-[18px] w-[18px] shrink-0 text-primary transition-transform duration-500 ease-out",
+          !disabled && !isActive && "group-hover/settings:rotate-90",
         )}
       />
       <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">

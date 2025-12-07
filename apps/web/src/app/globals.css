@@ -366,3 +366,78 @@
     opacity: 1;
   }
 }
+
+/* High Contrast Mode */
+.high-contrast {
+  /* Light Mode High Contrast */
+  --background: #FFFFFF;
+  --foreground: #000000;
+  --card: #FFFFFF;
+  --card-foreground: #000000;
+  --popover: #FFFFFF;
+  --popover-foreground: #000000;
+  --primary: #0000FF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E6E6E6;
+  --secondary-foreground: #000000;
+  --muted: #F5F5F5;
+  --muted-foreground: #333333;
+  --accent: #008000;
+  --accent-foreground: #FFFFFF;
+  --destructive: #FF0000;
+  --destructive-foreground: #FFFFFF;
+  --border: #000000;
+  --input: #FFFFFF;
+  --ring: #0000FF;
+  --sidebar: #F5F5F5;
+  --sidebar-foreground: #000000;
+  --sidebar-border: #000000;
+}
+
+.dark.high-contrast {
+  /* Dark Mode High Contrast */
+  --background: #000000;
+  --foreground: #FFFFFF;
+  --card: #1A1A1A;
+  --card-foreground: #FFFFFF;
+  --popover: #1A1A1A;
+  --popover-foreground: #FFFFFF;
+  --primary: #00FFFF;
+  --primary-foreground: #000000;
+  --secondary: #333333;
+  --secondary-foreground: #FFFFFF;
+  --muted: #2A2A2A;
+  --muted-foreground: #FFFFFF;
+  --accent: #00FF00;
+  --accent-foreground: #000000;
+  --destructive: #FF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #FFFFFF;
+  --input: #1A1A1A;
+  --ring: #00FFFF;
+  --sidebar: #1A1A1A;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-border: #FFFFFF;
+}
+
+/* Reduce Motion / Disable Animations */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+.reduce-motion .animate-icon-rotate-bounce,
+.reduce-motion .animate-icon-pulse-jitter,
+.reduce-motion .animate-icon-zoom-particles,
+.reduce-motion .animate-icon-tilt-flip,
+.reduce-motion .animate-glow-blue,
+.reduce-motion .animate-glow-mint,
+.reduce-motion .animate-glow-pink,
+.reduce-motion .animate-glow-teal {
+  animation: none !important;
+}

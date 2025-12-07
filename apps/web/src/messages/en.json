@@ -75,7 +75,82 @@
     "title": "About Page"
   },
   "Dashboard": {
-    "title": "Dashboard Page"
+    "home": {
+      "title": "Dashboard",
+      "description": "Monitor your learning progress with real-time data visualization.",
+      "createCourse": "Create New Course",
+      "createCourseDescription": "Upload materials and create a new learning course with AI",
+      "viewCourses": "View Courses",
+      "viewCoursesDescription": "Access all your courses and continue learning",
+      "startLearning": "Start Learning",
+      "startLearningDescription": "Continue learning from the last chapter you read",
+      "summary": "Learning Summary",
+      "summaryDescription": "Start by creating a new course or continue existing learning."
+    },
+    "courseCreation": {
+      "title": "Create New Course",
+      "topicLabel": "What would you like to learn today?",
+      "topicPlaceholder": "Example: Ancient Roman History...",
+      "uploadLabel": "Upload Materials",
+      "timelineLabel": "Select Learning Timeline",
+      "difficultyLabel": "Difficulty Level",
+      "createButton": "Create Course",
+      "creating": "Creating Course...",
+      "timeline": {
+        "quick": {
+          "title": "Quick Refresh",
+          "duration": "2 Hours",
+          "description": "Perfect for quick review"
+        },
+        "standard": {
+          "title": "Standard",
+          "duration": "5-10 Hours",
+          "description": "Comprehensive and in-depth learning"
+        },
+        "deepDive": {
+          "title": "Deep Dive",
+          "duration": "25+ Hours",
+          "description": "Deep exploration with complete details"
+        }
+      },
+      "difficulty": {
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advanced": "Advanced"
+      }
+    },
+    "courseDashboard": {
+      "chapterList": "Chapter List",
+      "progressLabel": "Learning Progress",
+      "estimation": "Estimation",
+      "level": "Level",
+      "chaptersCompleted": "Chapters Completed"
+    },
+    "studyView": {
+      "sidebarTitle": "Chapters",
+      "duration": "Duration",
+      "previousChapter": "Previous Chapter",
+      "nextChapter": "Next Chapter",
+      "chatPlaceholder": "Type a message...",
+      "chatGreeting": "Hello! How can I help you with this material?",
+      "chatResponse": "Thank you for your question! I'll help explain more details about this material.",
+      "introduction": "Introduction",
+      "conclusion": "Conclusion"
+    },
+    "quizView": {
+      "questionCounter": "Question {current} of {total}",
+      "previous": "Previous",
+      "submitAnswer": "Submit Answer",
+      "nextQuestion": "Next Question",
+      "finishQuiz": "Finish Quiz",
+      "correctTitle": "Your answer is correct!",
+      "correctMessage": "You understand this concept well.",
+      "incorrectTitle": "Not quite right!",
+      "incorrectMessage": "Please review the section about {topic}. The correct answer is {answer}.",
+      "aiTips": "AI Tutor Suggestion",
+      "correctTip": "Romulus is the founder and first king of the city of Rome. According to legend, he and his twin brother Remus were raised by a she-wolf.",
+      "incorrectTip": "Learn more about Ancient Roman history to better understand this concept. Please review the provided material again.",
+      "score": "Score"
+    }
   }
 }
-

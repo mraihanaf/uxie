@@ -2,30 +2,42 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Home, Info, LayoutDashboard, Sun, Moon } from "lucide-react";
-import { useTheme } from "./theme-provider";
+import { Home, Info, LayoutDashboard } from "lucide-react";
 import { SettingsButton } from "@/app/settings/settings-button";
 import { SettingsModal } from "@/app/settings/settings-modal";
-import { Link, usePathname } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-
-interface SidebarItem {
-  label: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-  iconColor: string;
-  animationClass: string;
-}
-
-// Sidebar items akan dibuat dinamis dengan translation
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { theme, toggleTheme } = useTheme();
-  const t = useTranslations("Navigation");
   const isAuthPage = pathname === "/login" || pathname === "/signup";
   const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
+
+  const navigationItems = [
+    {
+      href: "/home",
+      icon: Home,
+      label: "Home",
+      iconColor: "text-[#6ECDC1]",
+      animationClass: "group-hover:animate-icon-rotate-bounce",
+    },
+    {
+      href: "/about",
+      icon: Info,
+      label: "Tentang",
+      iconColor: "text-primary",
+      animationClass: "group-hover:animate-icon-pulse-jitter",
+    },
+    {
+      href: "/dashboard",
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      iconColor: "text-[#E6D9F3] dark:text-[#E6D9F3]",
+      animationClass:
+        "group-hover:animate-icon-zoom-particles group-hover:animate-glow-blue",
+    },
+  ];
 
   if (isAuthPage) {
     return null;
@@ -51,51 +63,11 @@ export function Sidebar() {
                 Uxie
               </span>
             </Link>
-            <button
-              onClick={toggleTheme}
-              className={cn(
-                "p-2 rounded-md transition-all duration-300 shrink-0",
-                "hover:scale-110 hover:rotate-180",
-                theme === "light"
-                  ? "text-primary hover:text-primary/80"
-                  : "text-[#6ECDC1] hover:text-[#6ECDC1]/80",
-              )}
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
           </div>
 
           {/* Menu Items */}
           <div className="flex flex-col gap-2 px-2 lg:px-3 pt-5 pb-5 group-hover:px-4">
-            {[
-              {
-                href: "/home",
-                icon: Home,
-                iconColor: "text-[#6ECDC1]",
-                animationClass: "group-hover:animate-icon-rotate-bounce",
-                labelKey: "home",
-              },
-              {
-                href: "/about",
-                icon: Info,
-                iconColor: "text-primary",
-                animationClass: "group-hover:animate-icon-pulse-jitter",
-                labelKey: "about",
-              },
-              {
-                href: "/dashboard",
-                icon: LayoutDashboard,
-                iconColor: "text-[#E6D9F3] dark:text-[#E6D9F3]",
-                animationClass:
-                  "group-hover:animate-icon-zoom-particles group-hover:animate-glow-blue",
-                labelKey: "dashboard",
-              },
-            ].map((item) => {
+            {navigationItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
 
@@ -110,7 +82,7 @@ export function Sidebar() {
                       ? "bg-[#E6D9F3]/60 dark:bg-[#3D2D5C]/60 border-l-[3px] border-primary text-primary"
                       : "text-foreground bg-transparent",
                   )}
-                  title={t(item.labelKey)}
+                  title={item.label}
                 >
                   <Icon
                     className={cn(
@@ -128,7 +100,7 @@ export function Sidebar() {
                       isActive && "text-primary font-medium",
                     )}
                   >
-                    {t(item.labelKey)}
+                    {item.label}
                   </span>
                 </Link>
               );

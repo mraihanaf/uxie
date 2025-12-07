@@ -2,8 +2,6 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
 import {
   Dialog,
   DialogOverlay,
@@ -21,9 +19,7 @@ import {
   Moon,
   Bell,
   Cloud,
-  Minimize2,
   Accessibility,
-  Info,
   Edit,
   ExternalLink,
   Volume2,
@@ -40,54 +36,49 @@ interface SettingsModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const languages = [
-  { value: "id", flag: "🇮🇩", name: "Indonesian", native: "Bahasa Indonesia" },
-  { value: "en", flag: "🇬🇧", name: "English", native: "English" },
-];
-
 export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const { theme, setTheme } = useTheme();
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-  const t = useTranslations("Settings");
-  const [language, setLanguage] = React.useState(locale);
   const [notifications, setNotifications] = React.useState(true);
   const [pushNotifications, setPushNotifications] = React.useState(true);
   const [emailNotifications, setEmailNotifications] = React.useState(true);
   const [sound, setSound] = React.useState(true);
   const [autoSave, setAutoSave] = React.useState(true);
-  const [compactMode, setCompactMode] = React.useState(false);
   const [accessibility, setAccessibility] = React.useState(false);
   const [highContrast, setHighContrast] = React.useState(false);
   const [reduceAnimations, setReduceAnimations] = React.useState(false);
-  const [fontSize, setFontSize] = React.useState(100);
   const [showAccessibilityOptions, setShowAccessibilityOptions] =
     React.useState(false);
   const [showNotificationsOptions, setShowNotificationsOptions] =
     React.useState(false);
-  const [showAboutModal, setShowAboutModal] = React.useState(false);
 
   // Load settings from localStorage on mount
   React.useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedLanguage = localStorage.getItem("uxie-language");
       const storedNotifications = localStorage.getItem("uxie-notifications");
       const storedAutoSave = localStorage.getItem("uxie-auto-save");
-      const storedCompactMode = localStorage.getItem("uxie-compact-mode");
+      const storedHighContrast = localStorage.getItem("uxie-high-contrast");
+      const storedReduceAnimations = localStorage.getItem(
+        "uxie-reduce-animations",
+      );
 
-      if (storedLanguage && ["id", "en"].includes(storedLanguage)) {
-        setLanguage(storedLanguage);
-      } else {
-        setLanguage(locale);
-      }
       if (storedNotifications !== null)
         setNotifications(storedNotifications === "true");
       if (storedAutoSave !== null) setAutoSave(storedAutoSave === "true");
-      if (storedCompactMode !== null)
-        setCompactMode(storedCompactMode === "true");
+      if (storedHighContrast !== null)
+        setHighContrast(storedHighContrast === "true");
+      if (storedReduceAnimations !== null)
+        setReduceAnimations(storedReduceAnimations === "true");
+
+      // Apply settings to document immediately
+      const root = document.documentElement;
+      if (storedHighContrast === "true") {
+        root.classList.add("high-contrast");
+      }
+      if (storedReduceAnimations === "true") {
+        root.classList.add("reduce-motion");
+      }
     }
-  }, [locale]);
+  }, []);
 
   // Save settings to localStorage
   const saveSetting = (key: string, value: string | boolean) => {
@@ -97,19 +88,11 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
     }
   };
 
-  const handleLanguageChange = (value: string) => {
-    if (value !== locale) {
-      setLanguage(value);
-      saveSetting("language", value);
-      // Redirect ke locale baru dengan path yang sama
-      router.replace(pathname, { locale: value });
-      // TODO: Show toast notification
-    }
-  };
-
   const handleThemeChange = (checked: boolean) => {
-    setTheme(checked ? "dark" : "light");
-    saveSetting("theme", checked ? "dark" : "light");
+    const newTheme = checked ? "dark" : "light";
+    setTheme(newTheme);
+    // Save manual preference
+    saveSetting("theme", newTheme);
   };
 
   const handleNotificationsChange = (checked: boolean) => {
@@ -127,10 +110,30 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
     saveSetting("auto-save", checked);
   };
 
-  const handleCompactModeChange = (checked: boolean) => {
-    setCompactMode(checked);
-    saveSetting("compact-mode", checked);
-    // TODO: Apply compact mode to layout
+  const handleHighContrastChange = (checked: boolean) => {
+    setHighContrast(checked);
+    saveSetting("high-contrast", checked);
+
+    // Apply to document immediately
+    const root = document.documentElement;
+    if (checked) {
+      root.classList.add("high-contrast");
+    } else {
+      root.classList.remove("high-contrast");
+    }
+  };
+
+  const handleReduceAnimationsChange = (checked: boolean) => {
+    setReduceAnimations(checked);
+    saveSetting("reduce-animations", checked);
+
+    // Apply to document immediately
+    const root = document.documentElement;
+    if (checked) {
+      root.classList.add("reduce-motion");
+    } else {
+      root.classList.remove("reduce-motion");
+    }
   };
 
   const handleAccessibilityToggle = () => {
@@ -154,7 +157,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
         <DialogOverlay />
         <DialogContent className="max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground hover:scrollbar-thumb-primary">
           <DialogHeader>
-            <DialogTitle>{t("title")}</DialogTitle>
+            <DialogTitle>Pengaturan</DialogTitle>
             <DialogClose />
           </DialogHeader>
           <Separator className="my-4" />
@@ -229,54 +232,27 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
             <div className="flex gap-3">
               <Button variant="secondary" size="sm" className="h-9">
                 <Edit className="h-4 w-4 mr-2" />
-                {t("profile.editProfile")}
+                Edit Profil
               </Button>
               <Button variant="ghost" size="sm" className="h-9">
                 <ExternalLink className="h-4 w-4 mr-2" />
-                {t("profile.viewFullProfile")}
+                Lihat Profil Lengkap
               </Button>
             </div>
-          </div>
-
-          {/* Language Section */}
-          <div className="mb-6">
-            <h3 className="text-base font-semibold text-foreground mb-3">
-              {t("language.title")}
-            </h3>
-            <p className="text-xs text-muted-foreground mb-3">
-              {t("language.description")}
-            </p>
-            <RadioGroup value={language} onValueChange={handleLanguageChange}>
-              {languages.map((lang) => (
-                <RadioItem key={lang.value} value={lang.value}>
-                  <div className="flex items-center gap-3 flex-1 min-w-0">
-                    <span className="text-xl shrink-0">{lang.flag}</span>
-                    <div className="flex flex-col items-start min-w-0">
-                      <span className="text-sm font-medium text-foreground leading-tight">
-                        {lang.name}
-                      </span>
-                      <span className="text-xs text-muted-foreground leading-tight">
-                        ({lang.native})
-                      </span>
-                    </div>
-                  </div>
-                </RadioItem>
-              ))}
-            </RadioGroup>
           </div>
 
           {/* General Section */}
           <div>
             <h3 className="text-base font-semibold text-foreground mb-3">
-              {t("general.title")}
+              Umum
             </h3>
             <p className="text-xs text-muted-foreground mb-3">
-              {t("general.description")}
+              Pengaturan umum aplikasi
             </p>
 
             <div className="space-y-3">
               {/* Dark Mode */}
-              <div className="flex items-center justify-between h-11 px-4 py-3 rounded-lg border border-border bg-muted/30">
+              <div className="flex items-center justify-between min-h-[44px] px-4 py-3 rounded-lg border border-border bg-muted/30">
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   {theme === "light" ? (
                     <Sun className="h-5 w-5 text-primary shrink-0" />
@@ -285,10 +261,10 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                   )}
                   <div className="flex flex-col items-start min-w-0">
                     <span className="text-sm font-medium text-foreground leading-tight">
-                      {t("general.darkMode")}
+                      Tema
                     </span>
                     <span className="text-xs text-muted-foreground leading-tight">
-                      {t("general.darkModeDescription")}
+                      Mengikuti pengaturan sistem perangkat Anda
                     </span>
                   </div>
                 </div>
@@ -300,15 +276,15 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
 
               {/* Notifications */}
               <div>
-                <div className="flex items-center justify-between h-11 px-4 py-3 rounded-lg border border-border bg-muted/30">
+                <div className="flex items-center justify-between min-h-[44px] px-4 py-3 rounded-lg border border-border bg-muted/30">
                   <div className="flex items-center gap-3 flex-1 min-w-0">
                     <Bell className="h-5 w-5 text-primary shrink-0" />
                     <div className="flex flex-col items-start min-w-0">
                       <span className="text-sm font-medium text-foreground leading-tight">
-                        {t("general.notifications")}
+                        Notifikasi
                       </span>
                       <span className="text-xs text-muted-foreground leading-tight">
-                        {t("general.notificationsDescription")}
+                        Terima notifikasi dari aplikasi
                       </span>
                     </div>
                   </div>
@@ -328,7 +304,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                       <div className="flex items-center gap-2">
                         <Smartphone className="h-4 w-4 text-muted-foreground" />
                         <span className="text-xs text-foreground">
-                          {t("general.pushNotifications")}
+                          Notifikasi push di browser
                         </span>
                       </div>
                       <Toggle
@@ -344,7 +320,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                       <div className="flex items-center gap-2">
                         <Mail className="h-4 w-4 text-muted-foreground" />
                         <span className="text-xs text-foreground">
-                          {t("general.emailNotifications")}
+                          Kirim ringkasan email
                         </span>
                       </div>
                       <Toggle
@@ -360,7 +336,7 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                       <div className="flex items-center gap-2">
                         <Volume2 className="h-4 w-4 text-muted-foreground" />
                         <span className="text-xs text-foreground">
-                          {t("general.sound")}
+                          Suara notifikasi saat ada pesan
                         </span>
                       </div>
                       <Toggle
@@ -377,15 +353,15 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
               </div>
 
               {/* Auto-save */}
-              <div className="flex items-center justify-between h-11 px-4 py-3 rounded-lg border border-border bg-muted/30">
+              <div className="flex items-center justify-between min-h-[44px] px-4 py-3 rounded-lg border border-border bg-muted/30">
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   <Cloud className="h-5 w-5 text-primary shrink-0" />
                   <div className="flex flex-col items-start min-w-0">
                     <span className="text-sm font-medium text-foreground leading-tight">
-                      {t("general.autoSave")}
+                      Simpan Otomatis
                     </span>
                     <span className="text-xs text-muted-foreground leading-tight">
-                      {t("general.autoSaveDescription")}
+                      Simpan perubahan secara otomatis
                     </span>
                   </div>
                 </div>
@@ -395,40 +371,21 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                 />
               </div>
 
-              {/* Compact Mode */}
-              <div className="flex items-center justify-between h-11 px-4 py-3 rounded-lg border border-border bg-muted/30">
-                <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <Minimize2 className="h-5 w-5 text-primary shrink-0" />
-                  <div className="flex flex-col items-start min-w-0">
-                    <span className="text-sm font-medium text-foreground leading-tight">
-                      {t("general.compactMode")}
-                    </span>
-                    <span className="text-xs text-muted-foreground leading-tight">
-                      {t("general.compactModeDescription")}
-                    </span>
-                  </div>
-                </div>
-                <Toggle
-                  checked={compactMode}
-                  onCheckedChange={handleCompactModeChange}
-                />
-              </div>
-
               {/* Accessibility */}
               <div>
                 <button
                   type="button"
                   onClick={handleAccessibilityToggle}
-                  className="w-full flex items-center justify-between h-11 px-4 py-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 transition-colors"
+                  className="w-full flex items-center justify-between min-h-[44px] px-4 py-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 transition-colors"
                 >
                   <div className="flex items-center gap-3 flex-1 min-w-0">
                     <Accessibility className="h-5 w-5 text-primary shrink-0" />
                     <div className="flex flex-col items-start min-w-0">
                       <span className="text-sm font-medium text-foreground leading-tight">
-                        {t("general.accessibility")}
+                        Aksesibilitas
                       </span>
                       <span className="text-xs text-muted-foreground leading-tight">
-                        {t("general.accessibilityDescription")}
+                        Pengaturan untuk aksesibilitas
                       </span>
                     </div>
                   </div>
@@ -443,142 +400,37 @@ export function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
                   <div className="mt-3 ml-8 space-y-2">
                     <div className="flex items-center justify-between h-9 px-4 rounded-lg">
                       <span className="text-xs text-foreground">
-                        {t("general.fontSize")}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {fontSize}%
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between h-9 px-4 rounded-lg">
-                      <span className="text-xs text-foreground">
-                        {t("general.highContrast")}
+                        Kontras Tinggi
                       </span>
                       <Toggle
                         size="small"
                         checked={highContrast}
-                        onCheckedChange={(checked) => {
-                          setHighContrast(checked);
-                          saveSetting("high-contrast", checked);
-                        }}
+                        onCheckedChange={handleHighContrastChange}
                       />
                     </div>
                     <div className="flex items-center justify-between h-9 px-4 rounded-lg">
                       <span className="text-xs text-foreground">
-                        {t("general.reduceAnimations")}
+                        Kurangi Animasi
                       </span>
                       <Toggle
                         size="small"
                         checked={reduceAnimations}
-                        onCheckedChange={(checked) => {
-                          setReduceAnimations(checked);
-                          saveSetting("reduce-animations", checked);
-                        }}
+                        onCheckedChange={handleReduceAnimationsChange}
                       />
                     </div>
                   </div>
                 )}
               </div>
-
-              {/* About */}
-              <button
-                type="button"
-                onClick={() => setShowAboutModal(true)}
-                className="w-full flex items-center justify-between h-11 px-4 py-3 rounded-lg border border-border bg-muted/30 hover:bg-muted/50 transition-colors"
-              >
-                <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <Info className="h-5 w-5 text-primary shrink-0" />
-                  <div className="flex flex-col items-start min-w-0">
-                    <span className="text-sm font-medium text-foreground leading-tight">
-                      {t("general.about")}
-                    </span>
-                    <span className="text-xs text-muted-foreground leading-tight">
-                      {t("general.aboutDescription")}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground">v1.0.0</span>
-                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                </div>
-              </button>
             </div>
           </div>
 
           <DialogFooter>
             <Button variant="ghost" onClick={() => onOpenChange(false)}>
-              {t("close")}
+              Tutup
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {/* About Modal */}
-      {showAboutModal && (
-        <Dialog open={showAboutModal} onOpenChange={setShowAboutModal}>
-          <DialogOverlay />
-          <DialogContent className="max-w-md">
-            <DialogHeader>
-              <DialogTitle>Tentang Aplikasi</DialogTitle>
-              <DialogClose />
-            </DialogHeader>
-            <div className="space-y-4">
-              <div>
-                <p className="text-sm font-medium text-foreground mb-1">
-                  App Name
-                </p>
-                <p className="text-sm text-muted-foreground">Uxie</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground mb-1">
-                  Version
-                </p>
-                <p className="text-sm text-muted-foreground">1.0.0 beta</p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground mb-1">
-                  Build Number
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Build 2024120401
-                </p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground mb-1">
-                  Release Date
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  December 4, 2024
-                </p>
-              </div>
-              <div>
-                <p className="text-sm font-medium text-foreground mb-1">
-                  Copyright
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  © 2025 Uxie. All rights reserved.
-                </p>
-              </div>
-              <Separator />
-              <div className="flex flex-col gap-2">
-                <Button variant="ghost" size="sm" className="justify-start">
-                  Privacy Policy
-                </Button>
-                <Button variant="ghost" size="sm" className="justify-start">
-                  Terms of Service
-                </Button>
-                <Button variant="ghost" size="sm" className="justify-start">
-                  GitHub
-                </Button>
-              </div>
-            </div>
-            <DialogFooter>
-              <Button variant="ghost" onClick={() => setShowAboutModal(false)}>
-                Tutup
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      )}
     </>
   );
 }

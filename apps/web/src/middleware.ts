@@ -1,7 +1,11 @@
-import createMiddleware from "next-intl/middleware";
-import { routing } from "./i18n/routing";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export default createMiddleware(routing);
+export function middleware(request: NextRequest) {
+    // Simple middleware - no locale redirect
+    // Just pass through to the route
+    return NextResponse.next();
+}
 
 export const config = {
     // Matcher agar middleware tidak memproses file gambar/api/dll

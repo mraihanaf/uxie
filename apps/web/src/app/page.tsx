@@ -1,4 +1,5 @@
-// Root page - redirect akan dihandle oleh middleware ke [locale]
+import { redirect } from "next/navigation";
+
 export default function RootPage() {
-  return null;
+  redirect("/home");
 }
