@@ -1,0 +1,9 @@
+# Copy this file to terraform.tfvars and fill in your actual values
+# terraform.tfvars is gitignored and should never be committed
+
+organization_id = "your-organization-id"
+database_password = "your-database-password"
+supabase_access_token = "your-supabase-access-token"
+groq_api_key = "your-groq-api-key"
+vercel_api_token = "your-vercel-api-token"
+
