@@ -21,7 +21,7 @@ resource "vercel_project_environment_variable" "supabase_url" {
     target = ["production"]
     project_id = vercel_project.uxie.id
     key = "NEXT_PUBLIC_SUPABASE_URL"
-    value = "https://${supabase_project.uxie.name}.supabase.co"
+    value = "https://${supabase_project.uxie.id}.supabase.co"
 }
 
 resource "vercel_project_environment_variable" "publishable_default_key" {
