@@ -38,3 +38,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Terraform
+infra/*.tfstate
+infra/*.tfstate.*
+infra/*.tfvars
+infra/*.tfvars.json

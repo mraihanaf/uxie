@@ -1,14 +1,15 @@
 resource "vercel_project" "uxie" {
-    name = "uxie"
+    name = "uxie-fe"
     git_repository = {
         type = "github"
         repo = "mraihanaf/uxie"
     }
+    framework = "nextjs"
     root_directory = "apps/web"
 }
 
 resource "vercel_project" "ai" {
-    name = "ai"
+    name = "uxie-ai"
     git_repository = {
         type = "github"
         repo = "mraihanaf/uxie"
@@ -20,7 +21,7 @@ resource "vercel_project_environment_variable" "supabase_url" {
     target = ["production"]
     project_id = vercel_project.uxie.id
     key = "NEXT_PUBLIC_SUPABASE_URL"
-    value = "https://${supabase_project.uxie.id}.supabase.co"
+    value = "https://${supabase_project.uxie.name}.supabase.co"
 }
 
 resource "vercel_project_environment_variable" "publishable_default_key" {
@@ -70,4 +71,35 @@ resource "vercel_project_environment_variable" "ai_groq_api_key" {
     project_id = vercel_project.ai.id
     key = "GROQ_API_KEY"
     value = var.groq_api_key
+}
+
+# data "vercel_project_directory" "uxie" {
+#   path = "../apps/web"
+# }
+
+
+# resource "vercel_deployment" "uxie" {
+#   project_id  = vercel_project.uxie.id
+#   files       = data.vercel_project_directory.uxie.files
+#   production  = true
+# }
+
+# data "vercel_project_directory" "ai" {
+#     path = "../apps/ai"
+# }
+
+# resource "vercel_deployment" "ai" {
+#   project_id  = vercel_project.ai.id
+#   files       = data.vercel_project_directory.ai.files
+#   production  = true
+# }
+
+resource "vercel_project_domain" "uxie" {
+    project_id = vercel_project.uxie.id
+    domain = "tryuxie.vercel.app"
+}
+
+resource "vercel_project_domain" "ai" {
+    project_id = vercel_project.ai.id
+    domain = "ai-uxie.vercel.app"
 }

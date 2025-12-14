@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { LoginForm } from "@/components/login-form";
 import { AuthShell } from "@/components/layout";
 import { signIn, signInWithGoogle } from "@/lib/supabase/auth";
 
-export default function LoginPage() {
+function LoginPageContent() {
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | undefined>();
   const [loading, setLoading] = useState(false);
@@ -54,5 +54,24 @@ export default function LoginPage() {
         loading={loading}
       />
     </AuthShell>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <AuthShell>
+          <LoginForm
+            onSubmit={async () => {}}
+            onGoogleLogin={async () => {}}
+            error={undefined}
+            loading={true}
+          />
+        </AuthShell>
+      }
+    >
+      <LoginPageContent />
+    </Suspense>
   );
 }
