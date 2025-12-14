@@ -42,7 +42,7 @@ resource "vercel_project_environment_variable" "ai_allowed_origin" {
     target = ["production"]
     project_id = vercel_project.ai.id
     key = "ALLOWED_ORIGIN"
-    value = "https://${vercel_project.uxie.name}.vercel.app"
+    value = "https://tryuxie.vercel.app"
 }
 
 resource "vercel_project_environment_variable" "ai_supabase_url" {
@@ -72,7 +72,6 @@ resource "vercel_project_environment_variable" "ai_groq_api_key" {
     key = "GROQ_API_KEY"
     value = var.groq_api_key
 }
-
 # data "vercel_project_directory" "uxie" {
 #   path = "../apps/web"
 # }
