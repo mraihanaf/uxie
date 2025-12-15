@@ -1,19 +1,58 @@
-import { GalleryVerticalEnd } from "lucide-react";
+"use client";
 
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { LoginForm } from "@/components/login-form";
+import { AuthShell } from "@/components/layout";
+import { signIn, signInWithGoogle } from "@/lib/supabase/auth";
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
+  const [error, setError] = useState<string | undefined>();
+  const [loading, setLoading] = useState(false);
+
+  const redirect = searchParams.get("redirect") || "/app";
+
+  const handleSubmit = async (data: { email: string; password: string }) => {
+    setLoading(true);
+    setError(undefined);
+
+    try {
+      await signIn(data.email, data.password);
+      // Use window.location for full page reload so middleware can see cookies
+      window.location.href = redirect;
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to sign in. Please try again.",
+      );
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    setError(undefined);
+
+    try {
+      await signInWithGoogle();
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to sign in with Google.",
+      );
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
-      <div className="flex w-full max-w-sm flex-col gap-6">
-        <a href="#" className="flex items-center gap-2 self-center font-medium">
-          <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-            <GalleryVerticalEnd className="size-4" />
-          </div>
-          Acme Inc.
-        </a>
-        <LoginForm />
-      </div>
-    </div>
+    <AuthShell>
+      <LoginForm
+        onSubmit={handleSubmit}
+        onGoogleLogin={handleGoogleLogin}
+        error={error}
+        loading={loading}
+      />
+    </AuthShell>
   );
 }

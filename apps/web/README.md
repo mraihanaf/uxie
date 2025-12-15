@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uxie Web App
+
+The frontend for Uxie - an AI-powered educational platform that transforms static learning into interactive experiences.
+
+## Features
+
+- **AI-Generated Courses**: Create personalized courses on any topic
+- **Interactive Visualizations**: Dynamic charts, code examples, and mathematical formulas
+- **Adaptive Quizzes**: AI-graded assessments with personalized feedback
+- **AI Tutor Chat**: Ask questions and get contextual explanations
+- **Bilingual Support**: English and Indonesian language support
+- **Progress Tracking**: Track your learning journey across courses
+
+## Tech Stack
+
+- **Framework**: Next.js
+- **Styling**: Tailwind CSS 4 with custom design system
+- **Auth & Database**: Supabase (PostgreSQL, Auth, Realtime)
+- **AI Backend**: Mastra AI
+- **Visualization Libraries**: Recharts, React Plotly, React Flow, KaTeX
+
+## Prerequisites
+
+- Node.js 20+
+- pnpm 9+
+- Supabase project with the schema applied
+- Mastra AI backend running (see `../ai/README.md`)
+
+## Environment Variables
+
+Create a `.env.local` file with the following variables:
+
+```bash
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_PUBLISHABLE_DEFAULT_KEY
+
+# Mastra AI Backend
+NEXT_PUBLIC_MASTRA_API_URL=http://localhost:4111
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run the development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+### Adding New Components
 
-To learn more about Next.js, take a look at the following resources:
+1. Create component in `src/components/`
+2. Follow the design tokens in `globals.css`
+3. Use existing UI primitives from `src/components/ui/`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Build the production bundle:
 
-## Deploy on Vercel
+```bash
+pnpm build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Start the production server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm start
+```
+
+## Related
+
+- [Mastra AI Backend](../ai/README.md) - AI agents and course generation
