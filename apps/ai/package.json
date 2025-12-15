@@ -17,19 +17,34 @@
     "node": ">=22.13.0"
   },
   "dependencies": {
+    "@ai-sdk/groq": "^1.2.0",
+    "@ai-sdk/openai": "^2.0.79",
     "@mastra/core": "^0.24.6",
+    "@mastra/deployer-vercel": "^0.12.25",
     "@mastra/evals": "^0.14.4",
     "@mastra/libsql": "^0.16.3",
     "@mastra/loggers": "^0.10.19",
     "@mastra/memory": "^0.15.12",
-    "zod": "^3.23.8",
-    "@uxie/eslint-config": "workspace:*",
-    "@uxie/typescript-config": "workspace:*"
-  },
-  "devDependencies": {
+    "@mastra/pg": "^0.17.9",
+    "@mastra/rag": "^1.3.6",
+    "@supabase/supabase-js": "^2.86.2",
+    "@types/eslint": "^9.6.1",
     "@uxie/eslint-config": "workspace:*",
     "@uxie/typescript-config": "workspace:*",
+    "ai": "^5.0.108",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.5.0",
+    "pdf-parse": "^2.4.5",
+    "pg": "^8.13.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
     "@types/node": "^22.15.3",
+    "@types/pg": "^8.11.10",
+    "@uxie/eslint-config": "workspace:*",
+    "@uxie/typescript-config": "workspace:*",
     "mastra": "^0.18.6",
     "typescript": "^5.9.3"
   }
