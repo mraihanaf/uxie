@@ -4,6 +4,7 @@
 node_modules
 .pnp
 .pnp.js
+.cursor
 
 # Local env files
 .env
@@ -14,6 +15,7 @@ node_modules
 
 # Testing
 coverage
+testsprite_tests/tmp/
 
 # Turbo
 .turbo
