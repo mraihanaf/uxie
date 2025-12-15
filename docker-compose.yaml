@@ -1,0 +1,41 @@
+services:
+  ai:
+    build:
+      context: .  # Build context is the project root (monorepo root)
+      dockerfile: apps/ai/Dockerfile  # Dockerfile location relative to context
+    container_name: uxie-ai
+    ports:
+      - "4111:4111"
+    environment:
+      - NODE_ENV=production
+      - PORT=4111
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - SUPABASE_DB_URL=${SUPABASE_DB_URL}
+      - DATABASE_URL=${DATABASE_URL}
+      - LIBSQL_URL=${LIBSQL_URL:-file:./mastra.db}
+      - UNSPLASH_ACCESS_KEY=${UNSPLASH_ACCESS_KEY}
+      - ALLOWED_ORIGIN=${ALLOWED_ORIGIN:-*}
+    volumes:
+      # Persist LibSQL database
+      - ./data/ai:/app/.mastra/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .  # Build context is the project root
+      dockerfile: apps/web/Dockerfile  # Dockerfile location relative to context
+    container_name: uxie-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY}
+      - NEXT_PUBLIC_MASTRA_API_URL=${NEXT_PUBLIC_MASTRA_API_URL:-http://ai:4111}
+    depends_on:
+      - ai
+    restart: unless-stopped
+
